@@ -324,9 +324,9 @@ html[lang="ka"] .hero-title { font-size: clamp(30px, 4.6vw, 50px); max-width: 24
 .hero-visual {
   position: absolute;
   top: 50%;
-  right: -280px;
+  right: -200px;
   transform: translateY(-50%);
-  width: min(46vw, 720px);
+  width: min(36vw, 560px);
   pointer-events: none;
   opacity: 0;
   animation: bj-appear 900ms var(--ease-out) 250ms forwards;
