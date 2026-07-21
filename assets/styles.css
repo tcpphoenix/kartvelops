@@ -568,6 +568,11 @@ html[lang="ka"] .pov-panel-title { letter-spacing: 0.05em; }
   color: var(--azure);
 }
 html[lang="ka"] .founder-role { letter-spacing: 0.04em; }
+.founder-name {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
 .founder-bio { font-size: 16px; line-height: 1.7; }
 
 .team-note {
