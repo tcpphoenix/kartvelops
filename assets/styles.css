@@ -776,3 +776,15 @@ html.js .reveal.in { opacity: 1; transform: translateY(0); }
   .trust-row { grid-template-columns: 1fr; }
   .trust-item { padding-block: 14px; }
 }
+
+/* ============================================================
+   WINE CTA ACCENT — Georgian-wine warm accent, primary CTAs only.
+   ROLLBACK: delete this entire block (or git revert the commit
+   titled "Add wine CTA accent"). Everything above is untouched.
+   White on #9E3B34 = 6.7:1, on #7E2E28 = 9.4:1 (AA pass).
+   ============================================================ */
+:root { --wine: #9E3B34; --wine-deep: #7E2E28; }
+.btn-primary { background: var(--wine); }
+.btn-primary:hover { background: var(--wine-deep); }
+.btn-invert { background: var(--wine); color: var(--white); }
+.btn-invert:hover { background: var(--wine-deep); color: var(--white); }
