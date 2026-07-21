@@ -236,10 +236,12 @@
 
   var mobileMenu = document.getElementById("mobileMenu");
 
-  function closeMenu() {
+  function closeMenu(restoreFocus) {
     if (!mobileMenu || mobileMenu.hidden) return;
+    var hadFocus = mobileMenu.contains(document.activeElement);
     mobileMenu.hidden = true;
     menuToggleBtn.setAttribute("aria-expanded", "false");
+    if (restoreFocus || hadFocus) menuToggleBtn.focus();
   }
 
   if (menuToggleBtn && mobileMenu) {
@@ -252,12 +254,18 @@
     // close after choosing a destination
     var menuLinks = mobileMenu.querySelectorAll("a");
     for (var m = 0; m < menuLinks.length; m++) {
-      menuLinks[m].addEventListener("click", closeMenu);
+      menuLinks[m].addEventListener("click", function () { closeMenu(false); });
     }
 
     document.addEventListener("keydown", function (ev) {
-      if (ev.key === "Escape") closeMenu();
+      if (ev.key === "Escape") closeMenu(true);
     });
+
+    // leaving the mobile breakpoint (resize/rotate) closes the panel
+    var desktopMq = window.matchMedia("(min-width: 1025px)");
+    var mqHandler = function (ev) { if (ev.matches) closeMenu(false); };
+    if (desktopMq.addEventListener) desktopMq.addEventListener("change", mqHandler);
+    else if (desktopMq.addListener) desktopMq.addListener(mqHandler);
 
     document.addEventListener("click", function (ev) {
       if (mobileMenu.hidden) return;
@@ -315,13 +323,13 @@
   if (form) {
     form.addEventListener("submit", function (ev) {
       ev.preventDefault();
-      var name = document.getElementById("f-name").value.trim();
-      var email = document.getElementById("f-email").value.trim();
-      var msg = document.getElementById("f-msg").value.trim();
-      if (!name || !email || !msg) {
+      if (!form.checkValidity()) {
         form.reportValidity();
         return;
       }
+      var name = document.getElementById("f-name").value.trim();
+      var email = document.getElementById("f-email").value.trim();
+      var msg = document.getElementById("f-msg").value.trim();
       var subject = "Project inquiry — " + name;
       var body = msg + "\n\n— " + name + " <" + email + ">";
       window.location.href = "mailto:hello@kartvelops.com?subject=" +
