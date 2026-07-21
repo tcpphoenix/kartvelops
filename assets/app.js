@@ -1,6 +1,7 @@
 /* ============================================================
    KartvelOps — zero-dependency page script
-   i18n (en/ka) · scroll reveals · header state · contact form
+   i18n (en/ka) · mobile menu · scroll reveals · header state
+   · contact form
    ============================================================ */
 (function () {
   "use strict";
@@ -16,9 +17,12 @@
       "meta.title": "KartvelOps — Cloud, DevOps & Banking Systems · Tbilisi",
       "meta.desc": "KartvelOps is a Tbilisi-based IT consultancy. We implement, integrate and operate enterprise platforms — cloud infrastructure, DevOps and banking systems — with engineering discipline.",
       "skip": "Skip to content",
+      "aria.lang": "Language: English. Switch to Georgian.",
+      "aria.menu": "Menu",
       "nav.services": "Services",
+      "nav.pov": "Point of view",
       "nav.process": "How we work",
-      "nav.why": "Why us",
+      "nav.team": "Founders",
       "nav.contact": "Contact",
       "nav.cta": "Book a call",
       "hero.eyebrow": "Tbilisi, Georgia — IT consultancy",
@@ -28,19 +32,33 @@
       "hero.cta2": "See services",
       "status.available": "available for new projects",
       "trust.1": "Senior engineers only",
-      "trust.2": "Financial-sector delivery",
+      "trust.2": "20+ years inside banking",
       "trust.3": "Project-based pricing",
       "trust.4": "Tbilisi, on-site + remote",
       "services.eyebrow": "Services",
       "services.title": "What we take responsibility for",
       "svc1.title": "Cloud & DevOps engineering",
-      "svc1.body": "CI/CD pipelines, Kubernetes, infrastructure as code, observability. We design the platform, automate delivery, and leave your team faster than we found it.",
+      "svc1.body": "CI/CD pipelines, Kubernetes, infrastructure as code, observability — on-premises and in the cloud. We design the platform, automate delivery, and leave your team faster than we found it.",
       "svc2.title": "Banking systems implementation",
-      "svc2.body": "Rollout and configuration of banking software platforms — environment setup, data migration, testing and go-live, delivered to financial-sector standards.",
+      "svc2.body": "Rollout, parameterization and day-two operation of core and peripheral banking applications — environments, data migration, batch operations, UAT and go-live, run to financial-sector standards.",
       "svc3.title": "Systems integration",
       "svc3.body": "Connecting core platforms to the systems around them — APIs, middleware, reporting flows — with clean contracts and documented interfaces.",
       "svc4.title": "Managed operations",
       "svc4.body": "After go-live we stay accountable: monitoring, incident response, upgrades and SLAs — so the platform keeps earning trust.",
+      "pov.eyebrow": "Why we exist",
+      "pov.title": "Banks still run critical applications the old way.",
+      "pov.body1": "Inside most banks, core applications are kept alive by hand: manual deployments, environment drift, knowledge that lives in two people's heads, and release nights that run until morning. It works — until the person who knows the system leaves.",
+      "pov.body2": "We bring the discipline banks already demand everywhere else — audit trails, repeatability, monitoring — to application operations itself: versioned configuration, automated environments, documented runbooks, and releases that are boring by design.",
+      "pov.old.title": "the old way",
+      "pov.old.1": "manual deployments",
+      "pov.old.2": "knowledge in people's heads",
+      "pov.old.3": "release nights until morning",
+      "pov.old.4": "environments that drift apart",
+      "pov.new.title": "with kartvelops",
+      "pov.new.1": "automated pipelines",
+      "pov.new.2": "documented runbooks",
+      "pov.new.3": "observable systems",
+      "pov.new.4": "releases that are boring",
       "process.eyebrow": "How we work",
       "process.title": "Three phases, fixed responsibilities",
       "p1.title": "Assess",
@@ -53,9 +71,16 @@
       "why.title": "Small by design. Senior by default.",
       "why.body": "You work directly with the engineers who deliver — no account layers, no hand-offs. That is the point of a boutique consultancy: decisions are fast and accountability is personal.",
       "why.1": "Senior engineers only — no juniors learning on your budget.",
-      "why.2": "Financial-sector experience — we understand audit, compliance and uptime pressure.",
+      "why.2": "Financial-sector experience from the inside — audits, National Bank reporting deadlines, PCI DSS scope, uptime that regulators watch.",
       "why.3": "Project-based engagement — clear scope, clear price, no seat-filling.",
       "why.4": "Based in Tbilisi — on-site when it matters, remote when it's faster.",
+      "team.eyebrow": "Who you work with",
+      "team.title": "Two founders, one principle: know the system you run.",
+      "team.a.role": "Founder — Infrastructure & DevOps",
+      "team.a.bio": "A senior DevOps engineer who runs production platforms on-premises and in the cloud — and spent years inside a bank's IT operations, administering the applications the business depends on. Kubernetes, CI/CD and infrastructure as code, applied where uptime is regulated, not optional.",
+      "team.b.role": "Co-founder — Banking Operations & Quality",
+      "team.b.bio": "Twenty years inside Georgian banking — operations, back office and quality assurance. She has seen core systems from every seat that uses them, and now tests them the way an auditor reads them: nothing passes on trust.",
+      "team.note": "Behind the founders is a trusted circle of senior specialists in networking, application administration and Georgian core-banking platforms — engaged per project, never resold as a bench.",
       "contact.eyebrow": "Contact",
       "contact.title": "Tell us about your project",
       "contact.body": "Write a few lines about your systems and goals — we reply within one business day.",
@@ -75,9 +100,12 @@
       "meta.title": "KartvelOps — ღრუბელი, DevOps და საბანკო სისტემები · თბილისი",
       "meta.desc": "KartvelOps — IT საკონსულტაციო კომპანია თბილისში. ვნერგავთ, ვაინტეგრირებთ და ვემსახურებით საწარმოო პლატფორმებს — ღრუბლოვან ინფრასტრუქტურას, DevOps-სა და საბანკო სისტემებს — საინჟინრო დისციპლინით.",
       "skip": "გადადით შინაარსზე",
+      "aria.lang": "ენა: ქართული. გადართეთ ინგლისურზე.",
+      "aria.menu": "მენიუ",
       "nav.services": "სერვისები",
+      "nav.pov": "ჩვენი ხედვა",
       "nav.process": "როგორ ვმუშაობთ",
-      "nav.why": "რატომ ჩვენ",
+      "nav.team": "დამფუძნებლები",
       "nav.contact": "კონტაქტი",
       "nav.cta": "დაჯავშნეთ ზარი",
       "hero.eyebrow": "თბილისი, საქართველო — IT კონსალტინგი",
@@ -87,19 +115,33 @@
       "hero.cta2": "სერვისების ნახვა",
       "status.available": "ვიღებთ ახალ პროექტებს",
       "trust.1": "მხოლოდ სენიორი ინჟინრები",
-      "trust.2": "გამოცდილება ფინანსურ სექტორში",
+      "trust.2": "20+ წელი საბანკო სექტორში",
       "trust.3": "პროექტული ფასწარმოქმნა",
       "trust.4": "თბილისი — ადგილზე + დისტანციურად",
       "services.eyebrow": "სერვისები",
       "services.title": "რაზეც პასუხისმგებლობას ვიღებთ",
       "svc1.title": "ღრუბლოვანი და DevOps ინჟინერია",
-      "svc1.body": "CI/CD მილსადენები, Kubernetes, ინფრასტრუქტურა როგორც კოდი, მონიტორინგი. ვაპროექტებთ პლატფორმას, ვაავტომატებთ მიწოდებას და თქვენს გუნდს უფრო ძლიერს ვტოვებთ, ვიდრე დავხვდით.",
+      "svc1.body": "CI/CD მილსადენები, Kubernetes, ინფრასტრუქტურა როგორც კოდი, მონიტორინგი — საკუთარ სერვერებზეც და ღრუბელშიც. ვაპროექტებთ პლატფორმას, ვაავტომატებთ მიწოდებას და თქვენს გუნდს უფრო ძლიერს ვტოვებთ, ვიდრე დავხვდით.",
       "svc2.title": "საბანკო სისტემების დანერგვა",
-      "svc2.body": "საბანკო პროგრამული პლატფორმების გაშვება და კონფიგურაცია — გარემოს მომზადება, მონაცემთა მიგრაცია, ტესტირება და ექსპლუატაციაში გაშვება ფინანსური სექტორის სტანდარტებით.",
+      "svc2.body": "საბანკო აპლიკაციების დანერგვა, პარამეტრიზაცია და ყოველდღიური ოპერირება — გარემოები, მონაცემთა მიგრაცია, batch ოპერაციები, UAT და ექსპლუატაციაში გაშვება ფინანსური სექტორის სტანდარტებით.",
       "svc3.title": "სისტემური ინტეგრაცია",
       "svc3.body": "ძირითადი პლატფორმების დაკავშირება გარემომცველ სისტემებთან — API-ები, შუალედური პროგრამები, საანგარიშო ნაკადები — მკაფიო კონტრაქტებითა და დოკუმენტირებული ინტერფეისებით.",
       "svc4.title": "მართული ოპერაციები",
       "svc4.body": "გაშვების შემდეგ პასუხისმგებლობა ჩვენზე რჩება: მონიტორინგი, ინციდენტებზე რეაგირება, განახლებები და SLA — რომ პლატფორმამ ნდობა შეინარჩუნოს.",
+      "pov.eyebrow": "რატომ ვარსებობთ",
+      "pov.title": "ბანკები კრიტიკულ სისტემებს ისევ ძველებურად უვლიან.",
+      "pov.body1": "ბანკების უმეტესობაში საბანკო აპლიკაციები ხელით მართვას ეყრდნობა: მანუალური დეპლოიმენტები, ერთმანეთისგან დაშორებული გარემოები, ცოდნა, რომელიც ორი ადამიანის თავშია, და რელიზები, რომლებიც დილამდე გრძელდება. ეს მუშაობს — სანამ სისტემის მცოდნე ადამიანი არ წავა.",
+      "pov.body2": "ჩვენ აპლიკაციების ოპერირებაში შემოგვაქვს ის დისციპლინა, რომელსაც ბანკები ყველგან ისედაც ითხოვენ — აუდიტის კვალი, განმეორებადობა, მონიტორინგი: ვერსიონირებული კონფიგურაცია, ავტომატიზებული გარემოები, დოკუმენტირებული ინსტრუქციები და რელიზები, რომლებიც განზრახ მოსაწყენია.",
+      "pov.old.title": "ძველებურად",
+      "pov.old.1": "მანუალური დეპლოიმენტები",
+      "pov.old.2": "ცოდნა ადამიანების თავებში",
+      "pov.old.3": "ღამის რელიზები დილამდე",
+      "pov.old.4": "ერთმანეთისგან დაშორებული გარემოები",
+      "pov.new.title": "KartvelOps-თან",
+      "pov.new.1": "ავტომატიზებული მილსადენები",
+      "pov.new.2": "დოკუმენტირებული ინსტრუქციები",
+      "pov.new.3": "დაკვირვებადი სისტემები",
+      "pov.new.4": "მოსაწყენი, პროგნოზირებადი რელიზები",
       "process.eyebrow": "როგორ ვმუშაობთ",
       "process.title": "სამი ეტაპი, მკაფიო პასუხისმგებლობა",
       "p1.title": "შეფასება",
@@ -112,9 +154,16 @@
       "why.title": "მცირე — განზრახ. სენიორი — ყოველთვის.",
       "why.body": "თქვენ პირდაპირ მუშაობთ იმ ინჟინრებთან, ვინც პროექტს ასრულებს — შუამავლებისა და გადაბარებების გარეშე. ეს არის ბუტიკ-კონსალტინგის უპირატესობა: გადაწყვეტილებები სწრაფია, პასუხისმგებლობა — პირადი.",
       "why.1": "მხოლოდ სენიორი ინჟინრები — არავინ სწავლობს თქვენი ბიუჯეტის ხარჯზე.",
-      "why.2": "ფინანსური სექტორის გამოცდილება — გვესმის აუდიტის, შესაბამისობისა და უწყვეტობის მოთხოვნები.",
+      "why.2": "ფინანსური სექტორის გამოცდილება შიგნიდან — აუდიტი, ეროვნული ბანკის ანგარიშგების ვადები, PCI DSS, უწყვეტობა, რომელსაც რეგულატორი აკვირდება.",
       "why.3": "პროექტული თანამშრომლობა — მკაფიო ფარგლები, მკაფიო ფასი.",
       "why.4": "ვართ თბილისში — ადგილზე, როცა ეს მნიშვნელოვანია; დისტანციურად, როცა ეს უფრო სწრაფია.",
+      "team.eyebrow": "ვისთან მუშაობთ",
+      "team.title": "ორი დამფუძნებელი და ერთი პრინციპი: იცნობდე სისტემას, რომელსაც უვლი.",
+      "team.a.role": "დამფუძნებელი — ინფრასტრუქტურა და DevOps",
+      "team.a.bio": "სენიორი DevOps ინჟინერი, რომელიც საწარმოო პლატფორმებს მართავს საკუთარ სერვერებზეც და ღრუბელშიც — და წლები გაატარა ბანკის IT ოპერაციებში, სწორედ იმ აპლიკაციების ადმინისტრირებაში, რომლებზეც ბიზნესი დგას. Kubernetes, CI/CD და ინფრასტრუქტურა როგორც კოდი — იქ, სადაც უწყვეტობა რეგულირებულია და არა ნებაყოფლობითი.",
+      "team.b.role": "თანადამფუძნებელი — საბანკო ოპერაციები და ხარისხი",
+      "team.b.bio": "ოცი წელი ქართულ საბანკო სექტორში — ოპერაციები, ბექ-ოფისი და ხარისხის უზრუნველყოფა. საბანკო სისტემები ნანახი აქვს ყველა იმ ადგილიდან, საიდანაც მათ იყენებენ — და ახლა ამოწმებს ისე, როგორც აუდიტორი კითხულობს: ნდობით არაფერი გადის.",
+      "team.note": "დამფუძნებლების უკან დგას სენიორი სპეციალისტების სანდო წრე — ქსელები, აპლიკაციების ადმინისტრირება, ქართული საბანკო პლატფორმები — ჩართული კონკრეტულ პროექტში და არა გუნდის შესავსებად.",
       "contact.eyebrow": "კონტაქტი",
       "contact.title": "მოგვიყევით თქვენს პროექტზე",
       "contact.body": "მოგვწერეთ რამდენიმე წინადადება თქვენი სისტემებისა და მიზნების შესახებ — გიპასუხებთ ერთ სამუშაო დღეში.",
@@ -133,15 +182,17 @@
   };
 
   var LANG_KEY = "kartvelops-lang";
+  var langToggleBtn = document.getElementById("langToggle");
+  var menuToggleBtn = document.getElementById("menuToggle");
 
-  function setLang(lang) {
+  function setLang(lang, updateUrl) {
     if (!I18N[lang]) lang = "en";
     var dict = I18N[lang];
 
     document.documentElement.setAttribute("lang", lang);
     document.title = dict["meta.title"];
     var metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc && dict["meta.desc"]) metaDesc.setAttribute("content", dict["meta.desc"]);
+    if (metaDesc) metaDesc.setAttribute("content", dict["meta.desc"]);
 
     var nodes = document.querySelectorAll("[data-i18n]");
     for (var i = 0; i < nodes.length; i++) {
@@ -154,19 +205,64 @@
       opts[j].classList.toggle("active", opts[j].getAttribute("data-lang-opt") === lang);
     }
 
+    if (langToggleBtn) langToggleBtn.setAttribute("aria-label", dict["aria.lang"]);
+    if (menuToggleBtn) menuToggleBtn.setAttribute("aria-label", dict["aria.menu"]);
+
     try { localStorage.setItem(LANG_KEY, lang); } catch (e) { /* private mode */ }
+
+    if (updateUrl && window.history && history.replaceState) {
+      var url = lang === "ka" ? "?lang=ka" : window.location.pathname;
+      history.replaceState(null, "", url + window.location.hash);
+    }
   }
 
+  // priority: ?lang= param > saved choice > browser language
+  var paramLang = null;
+  try { paramLang = new URLSearchParams(window.location.search).get("lang"); } catch (e) { /* old browser */ }
   var saved = null;
   try { saved = localStorage.getItem(LANG_KEY); } catch (e) { /* private mode */ }
-  var initial = saved || (navigator.language && navigator.language.indexOf("ka") === 0 ? "ka" : "en");
-  setLang(initial);
+  var initial = paramLang || saved ||
+    (navigator.language && navigator.language.indexOf("ka") === 0 ? "ka" : "en");
+  setLang(initial, false);
 
-  var toggle = document.getElementById("langToggle");
-  if (toggle) {
-    toggle.addEventListener("click", function () {
+  if (langToggleBtn) {
+    langToggleBtn.addEventListener("click", function () {
       var current = document.documentElement.getAttribute("lang");
-      setLang(current === "en" ? "ka" : "en");
+      setLang(current === "en" ? "ka" : "en", true);
+    });
+  }
+
+  /* ---------- mobile menu ---------- */
+
+  var mobileMenu = document.getElementById("mobileMenu");
+
+  function closeMenu() {
+    if (!mobileMenu || mobileMenu.hidden) return;
+    mobileMenu.hidden = true;
+    menuToggleBtn.setAttribute("aria-expanded", "false");
+  }
+
+  if (menuToggleBtn && mobileMenu) {
+    menuToggleBtn.addEventListener("click", function () {
+      var open = mobileMenu.hidden;
+      mobileMenu.hidden = !open;
+      menuToggleBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+
+    // close after choosing a destination
+    var menuLinks = mobileMenu.querySelectorAll("a");
+    for (var m = 0; m < menuLinks.length; m++) {
+      menuLinks[m].addEventListener("click", closeMenu);
+    }
+
+    document.addEventListener("keydown", function (ev) {
+      if (ev.key === "Escape") closeMenu();
+    });
+
+    document.addEventListener("click", function (ev) {
+      if (mobileMenu.hidden) return;
+      var header = document.querySelector(".site-header");
+      if (header && !header.contains(ev.target)) closeMenu();
     });
   }
 
@@ -175,10 +271,16 @@
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var revealEls = document.querySelectorAll(".reveal");
 
-  if (reduced || !("IntersectionObserver" in window)) {
+  function revealAll() {
     for (var r = 0; r < revealEls.length; r++) revealEls[r].classList.add("in");
+  }
+
+  if (reduced || !("IntersectionObserver" in window)) {
+    revealAll();
   } else {
+    var ioAlive = false;
     var io = new IntersectionObserver(function (entries) {
+      ioAlive = true;
       for (var k = 0; k < entries.length; k++) {
         if (entries[k].isIntersecting) {
           entries[k].target.classList.add("in");
@@ -186,7 +288,12 @@
         }
       }
     }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
-    for (var m = 0; m < revealEls.length; m++) io.observe(revealEls[m]);
+    for (var n = 0; n < revealEls.length; n++) io.observe(revealEls[n]);
+    // The spec guarantees an initial callback for every observed element.
+    // If none arrives, the embedder's rendering loop is broken — fail open.
+    setTimeout(function () {
+      if (!ioAlive) { io.disconnect(); revealAll(); }
+    }, 1500);
   }
 
   /* ---------- header state ---------- */
