@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-60 -60 120 120">
+  <rect x="-60" y="-60" width="120" height="120" rx="24" fill="#0F172A"/>
+  <g fill="none" stroke="#38BDF8" stroke-width="4" stroke-linecap="round">
+    <g>
+      <path d="M 0 -14 C 10 -20, 24 -29, 38 -25"/>
+      <path d="M 0 -14 C 10 -20, 24 -29, 38 -25" transform="rotate(51.43)"/>
+      <path d="M 0 -14 C 10 -20, 24 -29, 38 -25" transform="rotate(102.86)"/>
+      <path d="M 0 -14 C 10 -20, 24 -29, 38 -25" transform="rotate(154.29)"/>
+      <path d="M 0 -14 C 10 -20, 24 -29, 38 -25" transform="rotate(205.71)"/>
+      <path d="M 0 -14 C 10 -20, 24 -29, 38 -25" transform="rotate(257.14)"/>
+      <path d="M 0 -14 C 10 -20, 24 -29, 38 -25" transform="rotate(308.57)"/>
+    </g>
+    <circle cx="0" cy="0" r="8"/>
+  </g>
+  <g fill="#FFFFFF">
+    <circle cx="38" cy="-25" r="4"/>
+    <circle cx="38" cy="-25" r="4" transform="rotate(51.43)"/>
+    <circle cx="38" cy="-25" r="4" transform="rotate(102.86)"/>
+    <circle cx="38" cy="-25" r="4" transform="rotate(154.29)"/>
+    <circle cx="38" cy="-25" r="4" transform="rotate(205.71)"/>
+    <circle cx="38" cy="-25" r="4" transform="rotate(257.14)"/>
+    <circle cx="38" cy="-25" r="4" transform="rotate(308.57)"/>
+    <circle cx="0" cy="0" r="3"/>
+  </g>
+</svg>
