@@ -203,8 +203,12 @@ html[lang="ka"] .section-title { max-width: 28ch; }
   font-weight: 500;
   color: var(--text-dark);
   padding-block: 6px;
+  white-space: nowrap;
   transition: color 180ms var(--ease-out);
 }
+/* Georgian labels run long — never let header items break mid-label */
+.lang-toggle, .header-cta { white-space: nowrap; }
+html[lang="ka"] .site-nav { gap: 22px; }
 .site-nav a:hover { color: var(--white); }
 
 .header-actions { display: flex; align-items: center; gap: 12px; }
