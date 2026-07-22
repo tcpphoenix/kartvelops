@@ -229,6 +229,19 @@
     (navigator.language && navigator.language.indexOf("ka") === 0 ? "ka" : "en");
   setLang(initial, false);
 
+  // content/texts.json is the editable source of truth (updated via /admin/).
+  // The baked-in strings above are the fallback if it's missing or invalid.
+  fetch("content/texts.json", { cache: "no-cache" })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (data) {
+      if (!data) return;
+      ["en", "ka"].forEach(function (l) {
+        if (data[l]) { for (var k in data[l]) I18N[l][k] = data[l][k]; }
+      });
+      setLang(document.documentElement.getAttribute("lang"), false);
+    })
+    .catch(function () { /* fallback texts remain */ });
+
   if (langToggleBtn) {
     langToggleBtn.addEventListener("click", function () {
       var current = document.documentElement.getAttribute("lang");

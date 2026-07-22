@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>KartvelOps — ტექსტების რედაქტორი</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Georgian:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #020617; --navy: #0F172A; --slate: #334155; --slate-3: #64748B;
+      --paper: #F8FAFC; --mist: #EDF1F6; --white: #FFFFFF; --border: #E2E8F0;
+      --azure: #0369A1; --azure-bright: #38BDF8; --wine: #9E3B34; --ok: #059669; --err: #DC2626;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "IBM Plex Sans", "Noto Sans Georgian", system-ui, sans-serif;
+      background: var(--paper); color: var(--slate); font-size: 15px; line-height: 1.6;
+      padding-bottom: 90px;
+    }
+    .top {
+      background: var(--navy); color: var(--white);
+      padding: 14px 20px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    }
+    .top h1 { font-size: 17px; font-weight: 600; }
+    .top .tag { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--azure-bright); }
+    .top a { color: #C7D2E1; font-size: 13px; margin-left: auto; }
+    .wrap { max-width: 860px; margin: 0 auto; padding: 24px 20px; }
+    .hint {
+      background: var(--mist); border: 1px solid var(--border); border-radius: 10px;
+      padding: 14px 16px; font-size: 13.5px; margin-bottom: 22px; color: var(--slate);
+    }
+    .card {
+      background: var(--white); border: 1px solid var(--border); border-radius: 10px;
+      padding: 24px; max-width: 460px; margin: 40px auto;
+    }
+    .card h2 { font-size: 18px; color: var(--ink); margin-bottom: 10px; }
+    .card p { font-size: 13.5px; margin-bottom: 14px; }
+    input, textarea {
+      width: 100%; font-family: inherit; font-size: 14px; color: var(--ink);
+      background: var(--white); border: 1px solid #B6C2D2; border-radius: 7px;
+      padding: 9px 11px;
+    }
+    textarea { resize: vertical; min-height: 64px; }
+    input:focus, textarea:focus { outline: none; border-color: var(--azure); box-shadow: 0 0 0 3px rgba(3,105,161,.12); }
+    button {
+      font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
+      border: none; border-radius: 8px; padding: 11px 22px;
+      background: var(--wine); color: var(--white);
+    }
+    button:hover { filter: brightness(0.92); }
+    button.quiet { background: transparent; color: var(--slate-3); font-weight: 500; }
+    details {
+      background: var(--white); border: 1px solid var(--border); border-radius: 10px;
+      margin-bottom: 14px; overflow: hidden;
+    }
+    summary {
+      cursor: pointer; padding: 14px 18px; font-weight: 600; color: var(--ink);
+      font-size: 15px; user-select: none;
+    }
+    summary:hover { background: var(--mist); }
+    .fields { padding: 4px 18px 18px; border-top: 1px solid var(--border); }
+    .field { margin-top: 16px; }
+    .field > label { display: block; font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+    .pair { display: grid; gap: 8px; }
+    .pair .lang-row { display: flex; gap: 8px; align-items: flex-start; }
+    .lang-tag {
+      flex: none; font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 500;
+      color: var(--azure); border: 1px solid var(--border); border-radius: 5px;
+      padding: 3px 6px; margin-top: 7px; width: 38px; text-align: center;
+    }
+    .savebar {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 10;
+      background: var(--navy); padding: 14px 20px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .savebar .status { font-size: 13.5px; color: #C7D2E1; }
+    .savebar .status.ok { color: #6EE7B7; }
+    .savebar .status.err { color: #FCA5A5; }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <h1>KartvelOps — ტექსტების რედაქტორი</h1>
+    <span class="tag">admin</span>
+    <a href="../" target="_blank" rel="noopener">საიტის ნახვა ↗</a>
+  </header>
+
+  <!-- ============ LOGIN ============ -->
+  <div class="card" id="loginCard">
+    <h2>შესვლა</h2>
+    <p>ჩასვით GitHub-ის წვდომის კოდი (token). კოდი ინახება მხოლოდ ამ ბრაუზერში — ის არასდროს იგზავნება არსად, გარდა GitHub-ისა.</p>
+    <input id="tokenInput" type="password" placeholder="github_pat_..." autocomplete="off">
+    <p style="margin-top:14px"></p>
+    <button id="loginBtn">შესვლა</button>
+    <p id="loginMsg" style="color:var(--err); margin-top:10px;"></p>
+  </div>
+
+  <!-- ============ EDITOR ============ -->
+  <div class="wrap hidden" id="editor">
+    <div class="hint">
+      შეცვალეთ ტექსტი და დააჭირეთ „შენახვას" ქვემოთ. საიტი განახლდება დაახლოებით 1 წუთში.
+      ყველა ცვლილება ინახება ისტორიაში — შეცდომის შემთხვევაში ყველაფრის აღდგენა შესაძლებელია.
+      <strong>EN</strong> — ინგლისური ვერსია, <strong>ქარ</strong> — ქართული.
+    </div>
+    <div id="sections"></div>
+  </div>
+
+  <div class="savebar hidden" id="savebar">
+    <button id="saveBtn">შენახვა</button>
+    <span class="status" id="status"></span>
+    <button class="quiet" id="logoutBtn" style="margin-left:auto">გასვლა</button>
+  </div>
+
+  <script>
+  (function () {
+    "use strict";
+
+    var REPO = "tcpphoenix/kartvelops";
+    var FILE = "content/texts.json";
+    var API = "https://api.github.com/repos/" + REPO + "/contents/" + FILE;
+    var TOKEN_KEY = "kartvelops-admin-token";
+
+    /* ---- section titles & field labels (Georgian) ---- */
+    var SECTIONS = [
+      ["hero",     "მთავარი ეკრანი"],
+      ["status",   "სტატუსის ზოლი"],
+      ["trust",    "ფაქტების ზოლი"],
+      ["services", "სერვისები — სათაური"],
+      ["svc1",     "სერვისი 01 — ღრუბელი და DevOps"],
+      ["svc2",     "სერვისი 02 — საბანკო სისტემები"],
+      ["svc3",     "სერვისი 03 — ინტეგრაცია"],
+      ["svc4",     "სერვისი 04 — მართული ოპერაციები"],
+      ["pov",      "ჩვენი ხედვა"],
+      ["process",  "როგორ ვმუშაობთ — სათაური"],
+      ["p1",       "ეტაპი 01 — შეფასება"],
+      ["p2",       "ეტაპი 02 — დანერგვა"],
+      ["p3",       "ეტაპი 03 — ოპერირება"],
+      ["why",      "რატომ ჩვენ"],
+      ["team",     "გუნდი"],
+      ["contact",  "კონტაქტი"],
+      ["form",     "ფორმა"],
+      ["nav",      "მენიუ (ნავიგაცია)"],
+      ["footer",   "ქვედა ზოლი"],
+      ["meta",     "SEO — სათაური და აღწერა"],
+      ["skip",     "წვდომადობა (იშვიათად შესაცვლელი)"],
+      ["aria",     "წვდომადობა — ეკრანის წამკითხველი"]
+    ];
+    var LABELS = {
+      "title": "სათაური", "body": "ტექსტი", "eyebrow": "ზედა წარწერა", "lead": "ქვესათაური",
+      "cta": "ღილაკი", "cta1": "მთავარი ღილაკი", "cta2": "მეორე ღილაკი",
+      "name": "სახელი", "role": "როლი", "bio": "აღწერა", "note": "შენიშვნა",
+      "send": "გაგზავნის ღილაკი", "email": "ელფოსტის ველი", "message": "შეტყობინების ველი",
+      "line": "ტექსტი", "desc": "აღწერა", "available": "სტატუსის ტექსტი",
+      "location": "მდებარეობა", "city": "ქალაქი", "response": "პასუხი", "responseTime": "პასუხის დრო",
+      "services": "მენიუ — სერვისები", "pov": "მენიუ — ხედვა", "process": "მენიუ — პროცესი",
+      "team": "მენიუ — გუნდი", "contact": "მენიუ — კონტაქტი", "lang": "ენის ღილაკის აღწერა", "menu": "მენიუს ღილაკი"
+    };
+    function labelFor(key) {
+      var parts = key.split(".");
+      var last = parts[parts.length - 1];
+      if (/^\d+$/.test(last)) {
+        var prev = parts[parts.length - 2];
+        if (prev === "old") return "ძველი გზა — პუნქტი " + last;
+        if (prev === "new") return "ახალი გზა — პუნქტი " + last;
+        return "პუნქტი " + last;
+      }
+      if (parts[1] === "a" || parts[1] === "b") {
+        var who = parts[1] === "a" ? "დამფუძნებელი — " : "თანადამფუძნებელი — ";
+        return who + (LABELS[last] || last);
+      }
+      return LABELS[last] || last;
+    }
+    function sectionFor(key) {
+      var p = key.split(".")[0];
+      if (p === "skip") return "skip";
+      return p;
+    }
+
+    /* ---- state ---- */
+    var data = null;   // {en:{}, ka:{}}
+    var sha = null;
+    var token = null;
+    try { token = localStorage.getItem(TOKEN_KEY); } catch (e) {}
+
+    var $ = function (id) { return document.getElementById(id); };
+
+    function b64encodeUtf8(str) {
+      return btoa(unescape(encodeURIComponent(str)));
+    }
+    function b64decodeUtf8(b64) {
+      return decodeURIComponent(escape(atob(b64.replace(/\n/g, ""))));
+    }
+
+    /* ---- load ---- */
+    function load() {
+      fetch(API, { headers: headers() })
+        .then(function (r) {
+          if (r.status === 401) throw new Error("auth");
+          if (!r.ok) throw new Error("http " + r.status);
+          return r.json();
+        })
+        .then(function (j) {
+          sha = j.sha;
+          data = JSON.parse(b64decodeUtf8(j.content));
+          render();
+          $("loginCard").classList.add("hidden");
+          $("editor").classList.remove("hidden");
+          $("savebar").classList.remove("hidden");
+        })
+        .catch(function (e) {
+          if (e.message === "auth") {
+            try { localStorage.removeItem(TOKEN_KEY); } catch (err) {}
+            token = null;
+            $("loginMsg").textContent = "კოდი არასწორია ან ვადაგასულია — სცადეთ თავიდან.";
+            showLogin();
+          } else {
+            $("loginMsg").textContent = "ჩატვირთვა ვერ მოხერხდა: " + e.message;
+            showLogin();
+          }
+        });
+    }
+    function headers() {
+      var h = { "Accept": "application/vnd.github+json" };
+      if (token) h["Authorization"] = "Bearer " + token;
+      return h;
+    }
+    function showLogin() {
+      $("loginCard").classList.remove("hidden");
+      $("editor").classList.add("hidden");
+      $("savebar").classList.add("hidden");
+    }
+
+    /* ---- render ---- */
+    function render() {
+      var host = $("sections");
+      host.innerHTML = "";
+      var keys = Object.keys(data.en);
+      SECTIONS.forEach(function (sec, idx) {
+        var secKeys = keys.filter(function (k) { return sectionFor(k) === sec[0]; });
+        if (!secKeys.length) return;
+        var det = document.createElement("details");
+        if (idx === 0) det.open = true;
+        var sum = document.createElement("summary");
+        sum.textContent = sec[1];
+        det.appendChild(sum);
+        var fields = document.createElement("div");
+        fields.className = "fields";
+        secKeys.forEach(function (k) {
+          var f = document.createElement("div");
+          f.className = "field";
+          var lab = document.createElement("label");
+          lab.textContent = labelFor(k);
+          f.appendChild(lab);
+          var pair = document.createElement("div");
+          pair.className = "pair";
+          ["en", "ka"].forEach(function (l) {
+            var row = document.createElement("div");
+            row.className = "lang-row";
+            var tag = document.createElement("span");
+            tag.className = "lang-tag";
+            tag.textContent = l === "en" ? "EN" : "ქარ";
+            row.appendChild(tag);
+            var long = (data[l][k] || "").length > 70;
+            var inp = document.createElement(long ? "textarea" : "input");
+            inp.value = data[l][k] || "";
+            inp.dataset.lang = l;
+            inp.dataset.key = k;
+            row.appendChild(inp);
+            pair.appendChild(row);
+          });
+          f.appendChild(pair);
+          fields.appendChild(f);
+        });
+        det.appendChild(fields);
+        host.appendChild(det);
+      });
+    }
+
+    /* ---- save ---- */
+    function collect() {
+      var out = { en: {}, ka: {} };
+      Object.keys(data.en).forEach(function (k) { out.en[k] = data.en[k]; });
+      Object.keys(data.ka).forEach(function (k) { out.ka[k] = data.ka[k]; });
+      var inputs = document.querySelectorAll("[data-key]");
+      for (var i = 0; i < inputs.length; i++) {
+        out[inputs[i].dataset.lang][inputs[i].dataset.key] = inputs[i].value;
+      }
+      return out;
+    }
+    function save(retrying) {
+      var st = $("status");
+      st.className = "status";
+      st.textContent = "ინახება…";
+      $("saveBtn").disabled = true;
+      var body = JSON.stringify(collect(), null, 2) + "\n";
+      fetch(API, {
+        method: "PUT",
+        headers: headers(),
+        body: JSON.stringify({
+          message: "Update site texts (admin)",
+          content: b64encodeUtf8(body),
+          sha: sha
+        })
+      })
+        .then(function (r) {
+          if (r.status === 409 && !retrying) {
+            return fetch(API, { headers: headers() })
+              .then(function (rr) { return rr.json(); })
+              .then(function (j) { sha = j.sha; save(true); });
+          }
+          if (r.status === 401 || r.status === 403) throw new Error("კოდს არ აქვს ჩაწერის უფლება ან ვადა გაუვიდა.");
+          if (!r.ok) throw new Error("შეცდომა (" + r.status + ")");
+          return r.json().then(function (j) {
+            if (j && j.content && j.content.sha) sha = j.content.sha;
+            st.className = "status ok";
+            st.textContent = "✓ შენახულია — საიტი განახლდება დაახლოებით 1 წუთში.";
+          });
+        })
+        .catch(function (e) {
+          st.className = "status err";
+          st.textContent = "✗ " + e.message;
+        })
+        .finally(function () { $("saveBtn").disabled = false; });
+    }
+
+    /* ---- events ---- */
+    $("loginBtn").addEventListener("click", function () {
+      var t = $("tokenInput").value.trim();
+      if (!t) { $("loginMsg").textContent = "ჩასვით კოდი."; return; }
+      token = t;
+      try { localStorage.setItem(TOKEN_KEY, t); } catch (e) {}
+      $("loginMsg").textContent = "";
+      load();
+    });
+    $("saveBtn").addEventListener("click", function () { save(false); });
+    $("logoutBtn").addEventListener("click", function () {
+      try { localStorage.removeItem(TOKEN_KEY); } catch (e) {}
+      token = null;
+      showLogin();
+    });
+
+    if (token) load(); else showLogin();
+  })();
+  </script>
+</body>
+</html>
